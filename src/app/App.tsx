@@ -1,9 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {ExpensesScreen} from './src/screens/ExpensesScreen.tsx';
-import {AddExpenseScreen} from './src/screens/AddExpenseScreen.tsx';
+import {ExpensesScreen} from '../screens/ExpensesScreen.tsx';
+import {AddExpenseScreen} from '../screens/AddExpenseScreen.tsx';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {StoreProvider} from '@/app/providers/store';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -23,11 +24,13 @@ function ExpensesStack() {
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Expenses" component={ExpensesStack} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <StoreProvider>
+      <NavigationContainer>
+        <Drawer.Navigator>
+          <Drawer.Screen name="Expenses" component={ExpensesStack} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </StoreProvider>
   );
 }
 
