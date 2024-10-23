@@ -1,8 +1,10 @@
 import {configureStore, ReducersMapObject} from '@reduxjs/toolkit';
-import {appReducer} from '@/entities/app/model/slice/appSlice.ts';
+import {IAppState, appReducer} from '@/entities/app';
+import {expenseReducer, IExpenseState} from '@/entities/expense';
 
 const rootReducer: ReducersMapObject<IRootState> = {
   app: appReducer,
+  expense: expenseReducer,
 };
 
 export const store = configureStore({
@@ -12,7 +14,10 @@ export const store = configureStore({
 });
 
 declare global {
-  interface IRootState {}
+  interface IRootState {
+    app: IAppState;
+    expense: IExpenseState;
+  }
 
   type TAppDispatch = typeof store.dispatch;
 

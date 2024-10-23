@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {ExpensesScreen} from '../screens/ExpensesScreen.tsx';
 import {AddExpenseScreen} from '../screens/AddExpenseScreen.tsx';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {StoreProvider} from '@/app/providers/store';
+import {StoreProvider} from '@/app/providers/storeProvider';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
