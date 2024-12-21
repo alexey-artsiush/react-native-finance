@@ -2,8 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'orange',
-
     display: 'flex',
     alignSelf: 'flex-end',
     justifyContent: 'center',
@@ -11,7 +9,6 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
   },
   text: {
-    color: 'white',
     fontWeight: 'bold',
   },
   buttonSmall: {
@@ -35,4 +32,22 @@ export const styles = StyleSheet.create({
   circleButton: {
     borderRadius: 9999,
   },
+  outlined: {
+    backgroundColor: 'transparent',
+  },
 });
+
+export const colorStyles = {
+  primary: {
+    backgroundColor: 'orange',
+    textColor: 'white',
+  },
+  secondary: {
+    backgroundColor: 'blue',
+    textColor: 'white',
+  },
+  outline: {
+    backgroundColor: 'transparent',
+    textColor: 'black',
+  },
+};

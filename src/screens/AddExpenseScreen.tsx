@@ -1,9 +1,10 @@
-import {Text} from "react-native";
+import { AddExpense } from "@/features/addExpense/AddExpense";
+import { View} from 'react-native';
 
 export const AddExpenseScreen = () => {
     return (
-        <Text>
-            Hello from calculation screen!
-        </Text>
+        <View>
+          <AddExpense />
+        </View>
     )
 }

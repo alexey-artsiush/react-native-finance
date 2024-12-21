@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import { View} from 'react-native';
 import {DataWidget} from '../widgets/DataWidget/ui/DataWidget/DataWidget.tsx';
 
 export const ExpensesScreen = () => {

@@ -32,8 +32,10 @@ export const ThemeProvider = ({children}: IThemeProviderProps) => {
   }
 
   return (
-    <NavigationContainer theme={[styles.container]}>
-      {children}
+    <NavigationContainer>
+      <View style={styles.container}>
+        {children}
+      </View>
     </NavigationContainer>
   );
 };
