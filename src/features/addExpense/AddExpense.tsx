@@ -3,8 +3,13 @@ import {UIButton} from '@/shared/ui';
 import { useState } from 'react';
 import {styles} from './AddExpense.style.tsx';
 import { useTheme } from '@/shared/lib/hooks/useTheme';
-export const AddExpense = () => {
-    const [currentTab, setCurrentTab] = useState<'income' | 'expenses'>('income');
+
+interface IProps {
+    currentTab: 'income' | 'expenses';
+    setCurrentTab: (tab: 'income' | 'expenses') => void;
+}
+
+export const SwitchExpenseIncome = ({currentTab, setCurrentTab}: IProps) => {
     const theme = useTheme();
 
     return (

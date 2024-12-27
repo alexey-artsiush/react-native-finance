@@ -1,10 +1,10 @@
-import { AddExpense } from "@/features/addExpense/AddExpense";
 import { View} from 'react-native';
+import { ExpenseIncomeWidget } from '@/widgets/ExpenseIncomeWidget/ExpenseIncomeWidget';
 
 export const AddExpenseScreen = () => {
     return (
         <View>
-          <AddExpense />
+          <ExpenseIncomeWidget />
         </View>
     )
 }

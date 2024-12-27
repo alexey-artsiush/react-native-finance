@@ -1,9 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IExpense} from '../types/i-expense';
 import {IExpenseState} from '../types/i-expense-state';
+import { getExpensesThunk } from '../thunks/expenseThunk';
 
 const initialState: IExpenseState = {
   expenses: [],
+  isLoading: false,
+  error: undefined,
 };
 
 const expenseSlice = createSlice({
@@ -19,9 +22,25 @@ const expenseSlice = createSlice({
         state.expenses[index] = action.payload;
       }
     },
-    deleteExpense: (state, action: PayloadAction<string>) => {
+    deleteExpense: (state, action: PayloadAction<number>) => {
       state.expenses = state.expenses.filter(e => e.id !== action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getExpensesThunk.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
+      .addCase(getExpensesThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.expenses = action.payload;
+        state.error = undefined;
+      })
+      .addCase(getExpensesThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      });
   },
 });
 

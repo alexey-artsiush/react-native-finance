@@ -1,6 +1,7 @@
 import {configureStore, ReducersMapObject} from '@reduxjs/toolkit';
 import {IAppState, appReducer} from '@/entities/app';
-import {expenseReducer, IExpenseState} from '@/entities/expense';
+import {IExpenseState} from '@/entities/expense';
+import { expenseReducer } from '@/entities/expense';
 
 const rootReducer: ReducersMapObject<IRootState> = {
   app: appReducer,

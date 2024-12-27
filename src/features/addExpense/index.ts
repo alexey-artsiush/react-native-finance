@@ -1,1 +1,1 @@
-export {AddExpense} from './AddExpense.tsx';
+export {SwitchExpenseIncome as AddExpense} from './AddExpense.tsx';
