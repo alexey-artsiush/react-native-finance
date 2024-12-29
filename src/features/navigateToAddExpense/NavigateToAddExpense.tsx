@@ -1,11 +1,12 @@
-import {View} from 'react-native';
-import {UIButton} from '@/shared/ui';
-import {useNavigation} from '@react-navigation/native';
-import {AddExpenseScreenNavigationProp} from '@/entities/expense/model/types/i-expense.ts';
-import {styles} from './NavigateToAddExpense.styles';
+import { View } from 'react-native';
+import { UIButton } from '@/shared/ui';
+import { useNavigation } from '@react-navigation/native';
+import { styles } from './NavigateToAddExpense.styles';
+import { NativeStackNavigationProp } from 'react-native-screens/lib/typescript/native-stack/types';
+import { RootStackParamList } from '@/shared/types/navigation';
 
 export const NavigateToAddExpense = () => {
-  const navigation = useNavigation<AddExpenseScreenNavigationProp>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handleNavigateToAddExpensePress = () => {
     navigation.navigate('AddExpense');

@@ -1,55 +1,42 @@
-import {View} from 'react-native';
-import {UIButton} from '@/shared/ui';
-import { useState } from 'react';
-import {styles} from './AddExpense.style.tsx';
-import { useTheme } from '@/shared/lib/hooks/useTheme';
+import { FC } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { ExpenseItem } from '../../entities/expense/ui/ExpenseItem/ExpenseItem';
+import { IExpense } from '../../entities/expense/model';
+import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
+import { expenseActions } from '@/entities/expense';
 
 interface IProps {
-    currentTab: 'income' | 'expenses';
-    setCurrentTab: (tab: 'income' | 'expenses') => void;
+  expenses: IExpense[];
 }
 
-export const SwitchExpenseIncome = ({currentTab, setCurrentTab}: IProps) => {
-    const theme = useTheme();
+export const AddExpense: FC<IProps> = ({ expenses }) => {
+  const dispatch = useAppDispatch();
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.buttonWrapper}>
-                <UIButton 
-                    color='outline' 
-                    onPress={() => setCurrentTab('income')}
-                    extraStyles={{
-                        container: [
-                            styles.tabButton,
-                            currentTab === 'income' && {
-                                borderBottomColor: theme.active
-                            }
-                        ],
-                        text: {
-                            color: currentTab === 'income' ? theme.active : theme.text
-                        }
-                    }}
-                >
-                    income
-                </UIButton>
-                <UIButton 
-                    color='outline' 
-                    onPress={() => setCurrentTab('expenses')}
-                    extraStyles={{
-                        container: [
-                            styles.tabButton,
-                            currentTab === 'expenses' && {
-                                borderBottomColor: theme.active
-                            }
-                        ],
-                        text: {
-                            color: currentTab === 'expenses' ? theme.active : theme.text
-                        }
-                    }}
-                >
-                    expenses
-                </UIButton>
-            </View>
+  const handleClick = (expense: IExpense) => {
+    dispatch(expenseActions.setCurrentExpense(expense));
+  };
+
+  return (
+    <View style={styles.container}>
+      {expenses.map((expense) => (
+        <View key={expense.id} style={styles.itemWrapper}>
+          <ExpenseItem expense={expense} onPress={handleClick} />
         </View>
-    );
+      ))}
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    gap: 10,
+  },
+  itemWrapper: {
+    width: '28%',
+    padding: 5,
+  },
+});

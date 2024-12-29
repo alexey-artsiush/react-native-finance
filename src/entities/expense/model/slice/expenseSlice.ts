@@ -1,12 +1,13 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {IExpense} from '../types/i-expense';
-import {IExpenseState} from '../types/i-expense-state';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IExpense } from '../types/i-expense';
+import { IExpenseState } from '../types/i-expense-state';
 import { getExpensesThunk } from '../thunks/expenseThunk';
 
 const initialState: IExpenseState = {
   expenses: [],
   isLoading: false,
   error: undefined,
+  currentExpense: null,
 };
 
 const expenseSlice = createSlice({
@@ -17,13 +18,16 @@ const expenseSlice = createSlice({
       state.expenses.push(action.payload);
     },
     editExpense: (state, action: PayloadAction<IExpense>) => {
-      const index = state.expenses.findIndex(e => e.id === action.payload.id);
+      const index = state.expenses.findIndex((e) => e.id === action.payload.id);
       if (index !== -1) {
         state.expenses[index] = action.payload;
       }
     },
+    setCurrentExpense: (state, action: PayloadAction<IExpense>) => {
+      state.currentExpense = action.payload;
+    },
     deleteExpense: (state, action: PayloadAction<number>) => {
-      state.expenses = state.expenses.filter(e => e.id !== action.payload);
+      state.expenses = state.expenses.filter((e) => e.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -44,5 +48,5 @@ const expenseSlice = createSlice({
   },
 });
 
-export const {actions: expenseActions} = expenseSlice;
-export const {reducer: expenseReducer} = expenseSlice;
+export const { actions: expenseActions } = expenseSlice;
+export const { reducer: expenseReducer } = expenseSlice;

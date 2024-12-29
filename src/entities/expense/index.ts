@@ -1,5 +1,4 @@
 export type { IExpense } from './model/types/i-expense';
 export type { IExpenseState } from './model/types/i-expense-state';
-export { ListExpenseItem } from './ui/ListExpenseItem/ListExpenseItem';
 export { ExpenseItem } from './ui/ExpenseItem/ExpenseItem';
-export {expenseReducer, expenseActions} from './model/slice/expenseSlice';
+export { expenseReducer, expenseActions } from './model/slice/expenseSlice';
