@@ -3,8 +3,8 @@ import { getTheme } from '@/entities/app';
 import { EThemes } from '@/entities/app/model/types/e-themes';
 import { lightTheme, darkTheme } from '@/app/themes';
 
-export const useTheme = () => {
+export const useAppTheme = () => {
   const currentTheme = useSelector(getTheme);
-  
+
   return currentTheme === EThemes.LIGHT ? lightTheme : darkTheme;
 };

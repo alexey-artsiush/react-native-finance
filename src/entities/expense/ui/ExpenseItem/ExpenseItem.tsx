@@ -1,35 +1,25 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { IExpense } from '../../model/types/i-expense';
+import { createStyles } from './ExpenseItem.styles';
+import { useMemo } from 'react';
+import { useAppTheme } from '@/shared/lib/hooks/useTheme';
 
 interface IProps {
   expense: IExpense;
   onPress: (expense: IExpense) => void;
+  currentExpense: boolean;
 }
 
-export const ExpenseItem = ({ expense, onPress }: IProps) => {
+export const ExpenseItem = ({ expense, onPress, currentExpense }: IProps) => {
+  const theme = useAppTheme();
+  const styles = useMemo(() => createStyles(theme), [theme]);
+
   return (
     <Pressable onPress={() => onPress(expense)}>
-      <View style={styles.container}>
+      <View style={[styles.container, currentExpense && styles.activeContainer]}>
         <View style={styles.circle} />
         <Text style={styles.title}>{expense.title}</Text>
       </View>
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-  },
-  circle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: '#ccc',
-    marginBottom: 8,
-  },
-  title: {
-    fontSize: 14,
-    color: '#333',
-  },
-});

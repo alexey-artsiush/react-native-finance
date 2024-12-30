@@ -1,9 +1,13 @@
-import { FC } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { createStyles } from './AddExpense.styles';
+import { FC, useMemo, useState } from 'react';
+import { View } from 'react-native';
 import { ExpenseItem } from '../../entities/expense/ui/ExpenseItem/ExpenseItem';
-import { IExpense } from '../../entities/expense/model';
+import { getCurrentExpense, IExpense } from '../../entities/expense/model';
 import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
 import { expenseActions } from '@/entities/expense';
+import { useSelector } from 'react-redux';
+import { useAppTheme } from '@/shared/lib/hooks/useTheme';
+import { UIAmountInput } from '@/shared/ui';
 
 interface IProps {
   expenses: IExpense[];
@@ -11,6 +15,10 @@ interface IProps {
 
 export const AddExpense: FC<IProps> = ({ expenses }) => {
   const dispatch = useAppDispatch();
+  const theme = useAppTheme();
+  const [amount, setAmount] = useState('');
+  const currentExpense = useSelector(getCurrentExpense);
+  const styles = useMemo(() => createStyles(theme), [theme]);
 
   const handleClick = (expense: IExpense) => {
     dispatch(expenseActions.setCurrentExpense(expense));
@@ -18,25 +26,17 @@ export const AddExpense: FC<IProps> = ({ expenses }) => {
 
   return (
     <View style={styles.container}>
+      <UIAmountInput value={amount} onChange={setAmount} />
+
       {expenses.map((expense) => (
         <View key={expense.id} style={styles.itemWrapper}>
-          <ExpenseItem expense={expense} onPress={handleClick} />
+          <ExpenseItem
+            currentExpense={currentExpense?.id === expense.id}
+            expense={expense}
+            onPress={handleClick}
+          />
         </View>
       ))}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    gap: 10,
-  },
-  itemWrapper: {
-    width: '28%',
-    padding: 5,
-  },
-});

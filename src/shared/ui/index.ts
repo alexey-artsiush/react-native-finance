@@ -1,1 +1,2 @@
-export {UIButton} from './UIButton';
+export { UIButton } from './UIButton';
+export { UIAmountInput } from './UIAmountInput/UIAmountInput';

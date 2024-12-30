@@ -1,6 +1,8 @@
-export const lightTheme = {
+import { ITheme } from '@/shared/types/themes';
+
+export const lightTheme: ITheme = {
   background: '#FFFFFF',
-  text: '#000000',
+  text: '#111111',
   button: '#4CAF50',
   primary: '#4CAF50',
   secondary: '#2196F3',
@@ -9,7 +11,7 @@ export const lightTheme = {
   warning: '#FFC107',
   success: '#8BC34A',
   gray: {
-    light: '#F5F5F5', 
+    light: '#F5F5F5',
     medium: '#E0E0E0',
     dark: '#757575',
   },
@@ -18,9 +20,9 @@ export const lightTheme = {
   inactive: '#9E9E9E',
 };
 
-export const darkTheme = {
+export const darkTheme: ITheme = {
   background: '#000000',
-  text: '#FFFFFF',
+  text: '#111111',
   button: '#9C27B0',
   primary: '#9C27B0',
   secondary: '#7C4DFF',

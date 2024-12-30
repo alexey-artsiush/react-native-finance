@@ -1,18 +1,18 @@
-import React, {ReactNode, useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {EThemes} from '@/entities/app/model/types/e-themes.ts';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { EThemes } from '@/entities/app/model/types/e-themes.ts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {appActions, getTheme} from '@/entities/app';
-import {NavigationContainer} from '@react-navigation/native';
+import { appActions, getTheme } from '@/entities/app';
+import { NavigationContainer } from '@react-navigation/native';
 
 interface IThemeProviderProps {
   children: ReactNode;
 }
 
-export const ThemeProvider = ({children}: IThemeProviderProps) => {
+export const ThemeProvider = ({ children }: IThemeProviderProps) => {
   const dispatch = useDispatch();
-  const theme = useSelector(getTheme);
+  const currentTheme = useSelector(getTheme);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,14 +28,12 @@ export const ThemeProvider = ({children}: IThemeProviderProps) => {
   }, [dispatch]);
 
   if (loading) {
-    return <Text>Загрузка темы...</Text>;
+    return <Text>Loading theme...</Text>;
   }
 
   return (
     <NavigationContainer>
-      <View style={styles.container}>
-        {children}
-      </View>
+      <View style={styles.container}>{children}</View>
     </NavigationContainer>
   );
 };

@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { UIButton } from '@/shared/ui';
 import { styles } from './SwitchExpenseIncome.style.tsx';
-import { useTheme } from '@/shared/lib/hooks/useTheme';
+import { useAppTheme } from '@/shared/lib/hooks/useTheme';
 
 interface IProps {
   currentTab: 'income' | 'expenses';
@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export const SwitchExpenseIncome = ({ currentTab, setCurrentTab }: IProps) => {
-  const theme = useTheme();
+  const theme = useAppTheme();
 
   return (
     <View style={styles.container}>

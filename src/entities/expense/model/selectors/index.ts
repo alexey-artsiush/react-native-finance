@@ -1,1 +1,3 @@
-export {getExpenseState} from './getExpenseState/getExpenseState';
+export { getExpenseState } from './getExpenseState';
+export { getCurrentExpense } from './getCurrentExpense';
+export { getExpenses } from './getExpenses';
