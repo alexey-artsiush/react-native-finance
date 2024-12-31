@@ -1,1 +1,0 @@
-export {ChooseExpenseIncomeItem} from './ui/ChooseExpenseIncomeItem';

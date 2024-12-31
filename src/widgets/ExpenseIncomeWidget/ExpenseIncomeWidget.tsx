@@ -1,22 +1,29 @@
 import { IExpense } from '@/entities/expense';
-import { IIncome } from '@/entities/income/model/types/i-income';
-import { ChooseExpenseIncomeItem } from '@/features/ChooseExpenseIncomeItem';
+import { getExpenses, getExpensesThunk } from '@/entities/expense/model';
+import { AddExpense } from '@/features/AddExpense/AddExpense';
 import { SwitchExpenseIncome } from '@/features/SwitchExpenseIncome';
-import { FC, useState } from 'react';
+import { useAppDispatch } from '@/shared/hooks/useAppDispatch';
+import { FC, useEffect, useState } from 'react';
 import { View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 export const ExpenseIncomeWidget: FC = () => {
+  const dispatch = useAppDispatch();
+  const expenses = useSelector(getExpenses);
   const [currentTab, setCurrentTab] = useState<'expenses' | 'income'>('expenses');
-  const [selectedItem, setSelectedItem] = useState<IExpense | IIncome | null>(null);
+
+  useEffect(() => {
+    dispatch(getExpensesThunk());
+  }, []);
 
   return (
     <View>
       <SwitchExpenseIncome currentTab={currentTab} setCurrentTab={setCurrentTab} />
-      <ChooseExpenseIncomeItem
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-        currentTab={currentTab}
-      />
+
+      <View>
+        {currentTab === 'expenses' && <AddExpense expenses={expenses} />}
+        {/* {currentTab === 'income' && <ListIncomeItem expenses={expenses} />} */}
+      </View>
     </View>
   );
 };
